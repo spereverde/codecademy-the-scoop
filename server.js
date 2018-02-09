@@ -270,6 +270,7 @@ function createComment(url, request) {
       downvotedBy: []
     };
 
+    console.log(comment.id);
     database.comments[comment.id] = comment;
     database.users[requestComment.username].commentIds.push(comment.id);
     database.articles[requestComment.articleId].commentIds.push(comment.id);
@@ -294,6 +295,14 @@ function deleteComment(url, request) {
   console.log(id);
   const savedComment = database.comments[id];
   const response = {};
+
+  if (savedComment) {
+    database.comments[id] = null;
+    const userCommentIds = database.users[savedComment.username].commentIds;
+    userCommentIds.splice(userCommentIds.indexOf(id), 1);
+    console.log(userCommentIds);
+    //userCommentIds.splice(userCommentIds.indexOf(id), 1);
+  }
 
   return response;
 }
