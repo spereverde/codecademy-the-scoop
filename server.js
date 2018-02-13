@@ -357,6 +357,21 @@ function downvoteComment(url, request) {
   return response;
 }
 
+function saveDatabase() {
+
+}
+
+function loadDatabase() {
+  yaml = require('js-yaml');
+  fs   = require('fs');
+  try {
+    var doc = yaml.safeLoad(fs.readFileSync('.example.yml', 'utf8'));
+    console.log(doc);
+  } catch (e) {
+    console.log(e);
+  }
+}
+
 // Write all code above this line.
 
 const http = require('http');
